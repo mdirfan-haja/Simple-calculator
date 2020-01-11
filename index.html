@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <style rel="stylesheet" type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            height: 100vh;
+            line-height: 1.6;
+            background: gray;
+            overflow: hidden;
+        }
+        
+        .header {
+            display: flex;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            height: 60px;
+            background: #00171F;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+        }
+        
+        #logo {
+            font-size: 40px;
+            font-family: 'Times New Roman', Times, serif;
+            width: 60%;
+            color: white;
+        }
+        
+        .btn {
+            border: none;
+            background-color: inherit;
+            padding: 14px 28px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration-line: none;
+        }
+        
+        .button1 {
+            color: black;
+            background-color: rgb(29, 248, 128);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        .button2 {
+            color: black;
+            background-color: rgb(208, 255, 0);
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+        
+        .btn:hover {
+            background-color: rgb(27, 190, 255);
+            color: white;
+        }
+        
+        .dash1 {
+            margin: 100px;
+            padding: 5px;
+            border: 13px dashed #1C6EA4;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+        
+        a {
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: center;
+        }
+        
+        h1 {
+            font-size: 4rem;
+        }
+        
+        p {
+            font-size: 1.5rem;
+        }
+        
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        
+        section#add {
+            background: url('./image/bike-chain-number-one-1061142.jpg') no-repeat center center/cover;
+        }
+        
+        section#sub {
+            background: url('./image/gray-steel-chain-on-orange-surface-1061141.jpg') no-repeat center center/cover;
+        }
+        
+        section#multi {
+            background: url('./image/grey-3-chain-1061140.jpg') no-repeat center center/cover;
+        }
+        
+        section#divide {
+            background: url('./image/illustration-of-gray-metal-chain-in-4-digit-form-1061139.jpg') no-repeat center center/cover;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div id="logo">
+            Simple calculator
+        </div>
+    </div>
+    <div class="container">
+        <div id="demo3">
+            <section id="add">
+                <span v-bind:title="message">
+            <p>Answer. {{result}}</p>
+        </span>
+                <p>
+                    Add Numbers here.
+                    <input v-model="add1" type="number"> +
+                    <input v-model="add2" type="number">
+                    <button v-on:click="calculateAdd" type="button" class="btn button2">Add</button>
+                </p>
+
+
+                <div class="dash1"> Click here to:
+                    <p>
+                        <a href="#sub" class="btn button1">Subtract</a>
+                        <a href="#multi" class="btn button1">Multiple</a>
+                        <a href="#divide" class="btn button1">Divide</a>
+                    </p>
+                </div>
+
+            </section>
+
+            <section id="sub">
+
+                <span v-bind:title="message">
+              <p>Answer. {{result1}}</p>
+          </span>
+                <p>
+                    Subtract here.
+                    <input v-model="subtract1" type="number"> -
+                    <input v-model="subtract2" type="number">
+                    <button v-on:click="calculateSub" type="button" class="btn button2">Sub</button>
+                </p>
+                <div class="dash1"> Click here to go:
+
+                    <p>
+                        <a href="#add" class="btn button1">Add</a>
+                        <a href="#multi" class="btn button1">Multiple</a>
+                        <a href="#divide" class="btn button1">Divide</a>
+                    </p>
+                </div>
+
+            </section>
+
+            <section id="multi">
+
+                <span v-bind:title="message">
+              <p>Answer. {{result2}}</p>
+         </span>
+                <p>
+                    Multiple here.
+                    <input v-model="multiple1" type="number"> *
+                    <input v-model="multiple2" type="number">
+                    <button v-on:click="calculateMulti" type="button" class="btn button2">Multiple</button>
+                </p>
+                <div class="dash1"> Click here to go:
+
+                    <p>
+                        <a href="#add" class="btn button1">Add</a>
+                        <a href="#sub" class="btn button1">Subtract</a>
+                        <a href="#divide" class="btn button1">Divide</a>
+                    </p>
+
+
+                </div>
+
+            </section>
+
+            <section id="divide">
+
+                <span v-bind:title="message">
+              <p>Answer. {{result3}}</p>
+         </span>
+                <p>
+                    Divide here.
+                    <input v-model="divide1" type="number"> ÷
+                    <input v-model="divide2" type="number">
+                    <button v-on:click="calculateDivide" type="button" class="btn button2">Multiple</button>
+                </p>
+                <div class="dash1"> Click here to go:
+
+                    <p>
+                        <a href="#add" class="btn button1">Add</a>
+                        <a href="#sub" class="btn button1">Subtract</a>
+                        <a href="#multi" class="btn button1">Multiple</a>
+                    </p>
+
+
+                </div>
+
+            </section>
+
+
+
+
+
+        </div>
+    </div>
+</body>
+
+
+<script>
+    var demo3 = new Vue({
+        el: "#demo3",
+        data: {
+            add1: 0,
+            add2: 0,
+            subtract1: 0,
+            subtract2: 0,
+            multiple1: 0,
+            multiple2: 0,
+            divide1: 0,
+            divide2: 0,
+            result: 0,
+            result1: 0,
+            result2: 0,
+            result3: 0,
+            message: 'You loaded this Answer on ' + new Date().toLocaleString()
+
+        },
+        methods: {
+            calculateAdd: function() {
+
+                //add numbers pr calulate use parseint
+                this.result = parseInt(this.add1) + parseInt(this.add2);
+
+
+
+            },
+            calculateSub: function() {
+                return this.result1 = parseInt(this.subtract1) - parseInt(this.subtract2)
+            },
+
+            calculateMulti: function() {
+                return this.result2 = parseInt(this.multiple1) * parseInt(this.multiple2)
+            },
+            calculateDivide: function() {
+                return this.result3 = parseInt(this.divide1) / parseInt(this.divide2)
+            }
+
+
+        }
+    })
+</script>
+
+</html>
